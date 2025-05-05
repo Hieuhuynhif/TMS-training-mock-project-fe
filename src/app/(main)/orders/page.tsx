@@ -31,7 +31,7 @@ function Page() {
                   Date: {new Date(order.orderDate).toLocaleString()}
                 </Typography>
               }
-            ></ListItemText>
+            />
             {order?.listOrderDetails.map((orderDetails) => (
               <OrderItem key={orderDetails.id} orderDetail={orderDetails} />
             ))}
