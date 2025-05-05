@@ -12,7 +12,7 @@ export default function layout({ children }: Props) {
       <Grid size={12} height={"7vh"} borderBottom={"solid 1px #555"}>
         <Header />
       </Grid>
-      <Grid size={12} height={"90vh"}>
+      <Grid size={12}>
         <Container>{children}</Container>
       </Grid>
       <Grid size={12} height={"3vh"} bgcolor={"#555"}></Grid>

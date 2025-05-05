@@ -1,12 +1,11 @@
 "use client";
 
-import Product from "@/app/(main)/products/ProductModel";
 import Item from "@/app/admin/items/ItemModel";
 import { Card, CardActionArea, CardHeader, CardMedia } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 
 type Props = {
-  item: Item | Product;
+  item: Item;
 };
 
 function ItemCard({ item }: Props) {

@@ -25,10 +25,10 @@ export function Header() {
         <Api />
       </Avatar>
       <Stack direction={"row"}>
-        <IconButton onClick={() => router.push("orders")}>
+        <IconButton onClick={() => router.push("/orders")}>
           <History />
         </IconButton>
-        <IconButton onClick={() => router.push("carts")}>
+        <IconButton onClick={() => router.push("/carts")}>
           <ShoppingCart />
         </IconButton>
         {isLogin ? (

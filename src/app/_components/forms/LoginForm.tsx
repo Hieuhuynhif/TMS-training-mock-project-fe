@@ -24,6 +24,7 @@ function LoginForm() {
       const user: User = await axiosInstance.post(PATH.LOGIN, values);
 
       localStorage.setItem("accessToken", user?.accessToken);
+      localStorage.setItem("isLogin", user?.role);
 
       if (user?.role == "ROLE_ADMIN") {
         localStorage.setItem("isLogin", user.role);

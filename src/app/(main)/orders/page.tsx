@@ -1,5 +1,41 @@
-function orders() {
-  return <div>orders</div>;
+"use client";
+
+import OrderItem from "@/app/_components/common/OrderItem";
+import PATH from "@/app/_constants/PATH";
+import {
+  Container,
+  List,
+  ListItemText,
+  Paper,
+  Typography,
+} from "@mui/material";
+import useSWR from "swr";
+import { axiosClient } from "../../../../config/axios";
+import { Order } from "./OrderModel";
+
+function Page() {
+  const { data } = useSWR<Order[]>(
+    PATH.ORDERS,
+    (url: string): Promise<Order[]> => axiosClient.get(url)
+  );
+
+  return (
+    <Container>
+      <List>
+        {data?.map((order) => (
+          <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
+            <ListItemText>
+              <Typography>ORDER ID: #{order.id}</Typography>
+              <Typography>Date: {order.orderDate.toString()}</Typography>
+            </ListItemText>
+            {order?.listOrderDetails.map((orderDetails) => (
+              <OrderItem key={orderDetails.id} orderDetail={orderDetails} />
+            ))}
+          </Paper>
+        ))}
+      </List>
+    </Container>
+  );
 }
 
-export default orders;
+export default Page;
