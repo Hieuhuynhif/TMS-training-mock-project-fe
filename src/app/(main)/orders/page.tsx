@@ -17,10 +17,9 @@ import Loading from "./loading";
 function Page() {
   const { data, isLoading } = useSWR<Order[]>(
     PATH.ORDERS,
-    (url: string): Promise<Order[]> => axiosClient.get(url),
-    { suspense: true }
+    (url: string): Promise<Order[]> => axiosClient.get(url)
   );
-  
+
   if (isLoading) return <Loading />;
 
   if (data)
