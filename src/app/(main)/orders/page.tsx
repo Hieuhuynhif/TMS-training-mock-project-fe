@@ -9,22 +9,23 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { Suspense } from "react";
 import useSWR from "swr";
 import { axiosClient } from "../../../../config/axios";
-import Loading from "./loading";
 import { Order } from "./OrderModel";
+import Loading from "./loading";
 
 function Page() {
-  const { data } = useSWR<Order[]>(
+  const { data, isLoading } = useSWR<Order[]>(
     PATH.ORDERS,
     (url: string): Promise<Order[]> => axiosClient.get(url),
     { suspense: true }
   );
+  
+  if (isLoading) return <Loading />;
 
-  return (
-    <Container>
-      <Suspense fallback={<Loading />}>
+  if (data)
+    return (
+      <Container>
         <List>
           {data?.map((order) => (
             <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
@@ -42,9 +43,8 @@ function Page() {
             </Paper>
           ))}
         </List>
-      </Suspense>
-    </Container>
-  );
+      </Container>
+    );
 }
 
 export default Page;
