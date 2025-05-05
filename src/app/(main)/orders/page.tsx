@@ -16,13 +16,14 @@ import { Order } from "./OrderModel";
 function Page() {
   const { data } = useSWR<Order[]>(
     PATH.ORDERS,
-    (url: string): Promise<Order[]> => axiosClient.get(url)
+    (url: string): Promise<Order[]> => axiosClient.get(url),
+    { suspense: true }
   );
 
   return (
     <Container>
       <List>
-        {(data ?? []).map((order) => (
+        {data?.map((order) => (
           <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
             <ListItemText
               primary={<Typography>ORDER ID: #{order.id}</Typography>}
