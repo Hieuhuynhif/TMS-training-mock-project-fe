@@ -10,7 +10,7 @@ type Props = {
 };
 
 async function page({ params }: Props) {
-  const { id } = await params;
+  const { id } = params;
   const res = await fetch(PATH.BASE_URL + PATH.ITEMS + "/" + id);
   const product: Product = await res.json();
 
