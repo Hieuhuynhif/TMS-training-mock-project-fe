@@ -6,11 +6,11 @@ import Product from "../ProductModel";
 export const revalidate = 60;
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 async function page({ params }: Props) {
-  const { id } = params;
+  const { id } = await params;
   const res = await fetch(PATH.BASE_URL + PATH.ITEMS + "/" + id);
   const product: Product = await res.json();
 
