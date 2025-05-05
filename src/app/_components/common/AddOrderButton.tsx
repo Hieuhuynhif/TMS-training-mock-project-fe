@@ -6,9 +6,9 @@ import { axiosClient } from "../../../../config/axios";
 function AddOrderButton() {
   const handleAddOrder = async () => {
     try {
-      const orders = await axiosClient.post(PATH.ORDERS);
+      await axiosClient.post(PATH.ORDERS);
       mutate(PATH.CARTS);
-      mutate(PATH.ORDERS, orders);
+      mutate(PATH.ORDERS, true);
     } catch (error) {
       console.log(error);
     }
