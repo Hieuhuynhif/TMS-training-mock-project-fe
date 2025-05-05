@@ -24,10 +24,14 @@ function Page() {
       <List>
         {data?.map((order) => (
           <Paper key={order.id} sx={{ p: 2, mb: 2 }}>
-            <ListItemText>
-              <Typography>ORDER ID: #{order.id}</Typography>
-              <Typography>Date: {order.orderDate.toString()}</Typography>
-            </ListItemText>
+            <ListItemText
+              primary={<Typography>ORDER ID: #{order.id}</Typography>}
+              secondary={
+                <Typography>
+                  Date: {new Date(order.orderDate).toLocaleString()}
+                </Typography>
+              }
+            ></ListItemText>
             {order?.listOrderDetails.map((orderDetails) => (
               <OrderItem key={orderDetails.id} orderDetail={orderDetails} />
             ))}
