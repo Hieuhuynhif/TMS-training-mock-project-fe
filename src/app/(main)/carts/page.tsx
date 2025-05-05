@@ -17,7 +17,7 @@ function Page() {
   return (
     <Container>
       <List>
-        {data?.listCartDetails.map((cartDetail) => (
+        {(data?.listCartDetails ?? []).map((cartDetail) => (
           <CartItem key={cartDetail.id} cartDetail={cartDetail} />
         ))}
       </List>
