@@ -1,6 +1,6 @@
 "use client";
 
-import Cart from "@/app/(main)/carts/CartModel";
+import { Cart } from "@/app/(main)/carts/CartModel";
 import Product from "@/app/(main)/products/ProductModel";
 import PATH from "@/app/_constants/PATH";
 import { AddShoppingCart } from "@mui/icons-material";

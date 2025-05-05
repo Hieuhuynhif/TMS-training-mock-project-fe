@@ -1,5 +1,5 @@
 "use client";
-import Cart from "@/app/(main)/carts/CartModel";
+import { Cart } from "@/app/(main)/carts/CartModel";
 import PATH from "@/app/_constants/PATH";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
