@@ -8,7 +8,6 @@ function AddOrderButton() {
     try {
       await axiosClient.post(PATH.ORDERS);
       mutate(PATH.CARTS);
-      mutate(PATH.ORDERS, true);
     } catch (error) {
       console.log(error);
     }
