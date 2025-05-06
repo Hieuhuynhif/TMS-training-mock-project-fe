@@ -4,10 +4,12 @@ import { Add, Delete, Remove } from "@mui/icons-material";
 import {
   IconButton,
   ListItem,
+  ListItemAvatar,
   ListItemIcon,
   ListItemText,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 import { mutate } from "swr";
 import { axiosClient } from "../../../../config/axios";
 
@@ -54,9 +56,20 @@ function CartItem({ cartDetail }: Props) {
           <Delete />
         </IconButton>
       }
+      divider
     >
+      <ListItemAvatar sx={{ width: "20%" }}>
+        <Image
+          alt={cartDetail.item.name}
+          height={120}
+          width={120}
+          src={"/images/item.jpg"}
+          style={{ borderRadius: "10px" }}
+          priority
+        />
+      </ListItemAvatar>
       <ListItemText sx={{ width: "10%" }}>ID: {cartDetail.id}</ListItemText>
-      <ListItemText sx={{ width: "40%" }}>
+      <ListItemText sx={{ width: "30%" }}>
         Item: {cartDetail.item.name}
       </ListItemText>
       <ListItemText sx={{ width: "20%" }}>

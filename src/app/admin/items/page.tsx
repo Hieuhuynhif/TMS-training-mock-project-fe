@@ -1,5 +1,5 @@
 import ItemCard from "@/app/_components/common/ItemCard";
-import { Container, Stack } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import AddItem from "../../_components/common/AddItem";
 import PATH from "../../_constants/PATH";
 import Item from "./ItemModel";
@@ -12,6 +12,8 @@ async function page() {
 
   return (
     <Container>
+      <Typography fontSize={"2rem"}>Items</Typography>
+
       <AddItem />
       <Stack direction={"row"} flexWrap={"wrap"} gap={2}>
         {items.map((item) => (

@@ -1,6 +1,7 @@
 import DeleteButton from "@/app/_components/common/DeleteButton";
 import PATH from "@/app/_constants/PATH";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Container, Stack, Typography } from "@mui/material";
+import Image from "next/image";
 import Item from "../ItemModel";
 
 export const revalidate = 60;
@@ -15,16 +16,30 @@ async function page({ params }: Props) {
   const item: Item = await res.json();
 
   return (
-    <Stack>
-      <Typography>ID: {item.id}</Typography>
-      <Typography>Name: {item.name}</Typography>
-      <Typography>${item.price}</Typography>
-      <Button color="primary">Edit</Button>
-      <DeleteButton
-        url={PATH.BASE_URL + PATH.ITEMS + "/" + id}
-        backUrl={"/admin/items"}
-      />
-    </Stack>
+    <Container>
+      <Typography fontSize={"2rem"}>Item Details</Typography>
+
+      <Stack>
+        <Image
+          alt={item.name}
+          src={"/images/item.jpg"}
+          width={500}
+          height={300}
+          style={{
+            borderRadius: "10px",
+          }}
+          priority
+        />
+        <Typography>ID: {item.id}</Typography>
+        <Typography>Name: {item.name}</Typography>
+        <Typography>${item.price}</Typography>
+        <Button color="primary">Edit</Button>
+        <DeleteButton
+          url={PATH.BASE_URL + PATH.ITEMS + "/" + id}
+          backUrl={"/admin/items"}
+        />
+      </Stack>
+    </Container>
   );
 }
 

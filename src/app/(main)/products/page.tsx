@@ -1,5 +1,5 @@
 import ProductCard from "@/app/_components/common/ProductCard";
-import { Container, Stack } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import PATH from "../../_constants/PATH";
 import Product from "./ProductModel";
 
@@ -11,6 +11,8 @@ async function products() {
 
   return (
     <Container>
+      <Typography fontSize={"2rem"}>Products</Typography>
+
       <Stack direction={"row"} flexWrap={"wrap"} gap={2} p={2}>
         {products.map((product) => (
           <ProductCard product={product} key={product.id} />

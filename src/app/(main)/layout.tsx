@@ -13,9 +13,9 @@ export default function layout({ children }: Props) {
         <Header />
       </Grid>
       <Grid size={12}>
-        <Container>{children}</Container>
+        <Container sx={{ p: 4, minHeight: "90vh" }}>{children}</Container>
       </Grid>
-      <Grid size={12} height={"3vh"} bgcolor={"#555"}></Grid>
+      <Grid size={12} height={"3vh"} bgcolor={"#f5f5f5"}></Grid>
     </Grid>
   );
 }

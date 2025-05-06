@@ -19,7 +19,7 @@ function ItemCard({ item }: Props) {
         <CardMedia
           component="img"
           height="194"
-          image="/images/item.png"
+          image="/images/item.jpg"
           title="green iguana"
         />
       </CardActionArea>
