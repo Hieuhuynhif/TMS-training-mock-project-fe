@@ -1,24 +1,10 @@
-"use client";
-
 import { Box, Paper } from "@mui/material";
-import { useRouter } from "next/navigation";
-import React, { useLayoutEffect } from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
 function Layout({ children }: Props) {
-  const router = useRouter();
-
-  useLayoutEffect(() => {
-    const isLogin = localStorage.getItem("isLogin");
-    if (isLogin) {
-      if (isLogin == "ROLE_ADMIN") router.push("/admin/items");
-      else router.push("/products");
-    }
-  });
-
   return (
     <Box
       sx={{

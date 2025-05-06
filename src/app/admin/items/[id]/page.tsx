@@ -34,10 +34,7 @@ async function page({ params }: Props) {
         <Typography>Name: {item.name}</Typography>
         <Typography>${item.price}</Typography>
         <Button color="primary">Edit</Button>
-        <DeleteButton
-          url={PATH.BASE_URL + PATH.ITEMS + "/" + id}
-          backUrl={"/admin/items"}
-        />
+        <DeleteButton url={PATH.ITEMS + "/" + id} backUrl={"/admin/items"} />
       </Stack>
     </Container>
   );

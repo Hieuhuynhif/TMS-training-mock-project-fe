@@ -13,7 +13,6 @@ export default function AddItemForm({ onCloseForm }: Props) {
 
   const handleOnSubmit = async (values: object) => {
     await axiosClient.post(PATH.ITEMS, values);
-    console.log(values);
     onCloseForm();
   };
 

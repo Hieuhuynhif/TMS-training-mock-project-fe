@@ -14,21 +14,21 @@ import {
 import { useState } from "react";
 import useSWR from "swr";
 import { axiosClient } from "../../../../config/axios";
+import useFetcher from "../../../../config/useFetcher";
 import { Order } from "./OrderModel";
 import Loading from "./loading";
 
 function Page() {
   const [isLastOrderView, setIsLastOrderView] = useState<boolean>(false);
+  const fetcher = useFetcher({
+    callback: (url: string): Promise<Order[]> => axiosClient.get(url),
+  });
+  const { data, isLoading } = useSWR(PATH.ORDERS, fetcher);
 
-  const { data, isLoading } = useSWR<Order[]>(
-    PATH.ORDERS,
-    (url: string): Promise<Order[]> => axiosClient.get(url)
-  );
-
-  const lastestOrder = useSWR(
-    PATH.ORDERS + "/lastestOrder",
-    (url: string): Promise<Order> => axiosClient.get(url)
-  );
+  const lastOrderFetcher = useFetcher({
+    callback: (url: string): Promise<Order> => axiosClient.get(url),
+  });
+  const lastestOrder = useSWR(PATH.ORDERS + "/lastestOrder", lastOrderFetcher);
 
   if (isLoading || lastestOrder.isLoading) return <Loading />;
 

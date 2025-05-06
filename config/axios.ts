@@ -2,7 +2,7 @@ import axios from "axios";
 import PATH from "../src/app/_constants/PATH";
 
 const axiosClient = axios.create({
-  baseURL: PATH.BASE_URL,
+  baseURL: "/api",
 });
 
 axiosClient.interceptors.request.use((config) => {
@@ -22,7 +22,7 @@ axiosClient.interceptors.response.use(
       localStorage.setItem("isLogin", "");
     }
 
-    return Promise.reject(error?.response?.data ?? error);
+    return Promise.reject(error);
   }
 );
 
@@ -31,7 +31,7 @@ const axiosInstance = axios.create({
 });
 axiosInstance.interceptors.response.use(
   (response) => response.data,
-  (error) => Promise.reject(error?.response?.data ?? error)
+  (error) => Promise.reject(error)
 );
 
 export { axiosClient, axiosInstance };

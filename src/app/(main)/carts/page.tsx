@@ -6,14 +6,16 @@ import PATH from "@/app/_constants/PATH";
 import { Container, List, Stack, Typography } from "@mui/material";
 import useSWR from "swr";
 import { axiosClient } from "../../../../config/axios";
+import useFetcher from "../../../../config/useFetcher";
 import { Cart } from "./CartModel";
 import Loading from "./loading";
 
 function Page() {
-  const { data, isLoading } = useSWR<Cart>(
-    PATH.CARTS,
-    (url: string): Promise<Cart> => axiosClient.get(url)
-  );
+  const fetcher = useFetcher({
+    callback: (url: string): Promise<Cart> => axiosClient.get(url),
+  });
+
+  const { data, isLoading } = useSWR(PATH.CARTS, fetcher);
 
   if (isLoading) return <Loading />;
 

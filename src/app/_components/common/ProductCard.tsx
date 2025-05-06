@@ -15,6 +15,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import { mutate } from "swr";
 import { axiosClient } from "../../../../config/axios";
+import useFetcher from "../../../../config/useFetcher";
 
 type Props = {
   product: Product;
@@ -24,16 +25,17 @@ function ProductCard({ product }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const handleAddCart = async () => {
-    try {
-      const isLogin = localStorage.getItem("isLogin");
-      if (!isLogin) {
-        return router.push("/login");
-      }
-      const cart: Cart = await axiosClient.post(PATH.CARTS, {
+  const fetcher = useFetcher({
+    callback: (): Promise<Cart> =>
+      axiosClient.post(PATH.CARTS, {
         itemId: product.id,
         quantity: 1,
-      });
+      }),
+  });
+
+  const handleAddCart = async () => {
+    try {
+      const cart = await fetcher();
 
       mutate(PATH.CARTS, cart);
     } catch (error) {
