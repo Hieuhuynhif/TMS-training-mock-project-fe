@@ -14,7 +14,8 @@ function AddOrderButton() {
     try {
       const order = await fetcher();
       mutate(PATH.CARTS);
-      mutate(PATH.ORDERS + "/lastestOrder", order);
+      mutate(PATH.ORDERS + "/lastest", order);
+      mutate(PATH.ORDERS, undefined, true);
     } catch (error) {
       console.log(error);
     }

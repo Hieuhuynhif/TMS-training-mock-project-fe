@@ -44,7 +44,7 @@ function SignupForm() {
             if (value != password) return "Password is not match";
           }}
         />
-        <Stack>
+        <Stack spacing={2}>
           <Button type="submit" variant="contained">
             Sign up
           </Button>

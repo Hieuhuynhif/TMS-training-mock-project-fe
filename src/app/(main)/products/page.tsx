@@ -6,7 +6,11 @@ import Product from "./ProductModel";
 export const revalidate = 60;
 
 async function products() {
-  const res = await fetch(PATH.BASE_URL + PATH.ITEMS);
+  const res = await fetch(PATH.BASE_URL + PATH.ITEMS, {
+    headers: {
+      "TMS-CONNECT-KEY": "tms-connect-key",
+    },
+  });
   const products: Product[] = await res.json();
 
   return (

@@ -1,13 +1,20 @@
 import PATH from "@/app/_constants/PATH";
 import { AxiosError } from "axios";
-import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 import { axiosInstance } from "../../../../config/axios";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      throw null;
+    }
+
     const response = await axiosInstance.get(PATH.ORDERS, {
       headers: {
-        Authorization: request.headers.get("Authorization") || "",
+        Authorization: `Bearer ${session.token}`,
       },
     });
     return NextResponse.json(response);
@@ -19,11 +26,16 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      throw null;
+    }
+
     const response = await axiosInstance.post(PATH.ORDERS, undefined, {
       headers: {
-        Authorization: request.headers.get("Authorization") || "",
+        Authorization: `Bearer ${session.token}`,
       },
     });
     return NextResponse.json(response);

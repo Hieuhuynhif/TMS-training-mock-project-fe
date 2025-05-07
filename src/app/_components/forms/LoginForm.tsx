@@ -1,37 +1,24 @@
 "use client";
 
+import { GitHub, Google, Home } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { axiosInstance } from "../../../../config/axios";
-import PATH from "../../_constants/PATH";
 import TextFieldController from "../controllers/TextFieldController";
 
 type User = {
-  id: string;
-  username: string;
-  accessToken: string;
-  role: string;
+  username: string | null;
+  password: string | null;
 };
 
 function LoginForm() {
-  const { handleSubmit, control } = useForm();
-
+  const { handleSubmit, control } = useForm<User>();
   const router = useRouter();
 
-  const handleLoginClick = async (values: object) => {
+  const handleLoginClick = async (values: User) => {
     try {
-      const user: User = await axiosInstance.post(PATH.LOGIN, values);
-
-      localStorage.setItem("accessToken", user?.accessToken);
-      localStorage.setItem("isLogin", user?.role);
-
-      if (user?.role == "ROLE_ADMIN") {
-        localStorage.setItem("isLogin", user.role);
-        router.push("/admin/items");
-      } else {
-        router.push("/products");
-      }
+      await signIn("credentials", { ...values });
     } catch (e) {
       console.log(e);
     }
@@ -50,12 +37,35 @@ function LoginForm() {
           name="password"
           label="Password"
         />
-        <Stack>
+        <Stack spacing={2}>
           <Button type="submit" variant="contained">
             Login
           </Button>
+
+          <Button
+            onClick={async () => {
+              await signIn("github");
+            }}
+            startIcon={<GitHub />}
+            color="error"
+            variant="outlined"
+          >
+            github
+          </Button>
+          <Button
+            onClick={async () => {
+              await signIn("google");
+            }}
+            startIcon={<Google />}
+            color="secondary"
+            variant="outlined"
+          >
+            google
+          </Button>
           <Button onClick={() => router.push("/signup")}>Join Us?</Button>
-          <Button onClick={() => router.push("/")}>Back to Home</Button>
+          <Button onClick={() => router.push("/")} startIcon={<Home />}>
+            Home
+          </Button>
         </Stack>
       </Stack>
     </form>

@@ -12,7 +12,11 @@ type Props = {
 
 async function page({ params }: Props) {
   const { id } = await params;
-  const res = await fetch(PATH.BASE_URL + PATH.ITEMS + "/" + id);
+  const res = await fetch(PATH.BASE_URL + PATH.ITEMS + "/" + id, {
+    headers: {
+      "TMS-CONNECT-KEY": "tms-connect-key",
+    },
+  });
   const item: Item = await res.json();
 
   return (

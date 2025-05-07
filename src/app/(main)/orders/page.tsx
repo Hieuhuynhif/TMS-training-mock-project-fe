@@ -28,7 +28,7 @@ function Page() {
   const lastOrderFetcher = useFetcher({
     callback: (url: string): Promise<Order> => axiosClient.get(url),
   });
-  const lastestOrder = useSWR(PATH.ORDERS + "/lastestOrder", lastOrderFetcher);
+  const lastestOrder = useSWR(PATH.ORDERS + "/lastest", lastOrderFetcher);
 
   if (isLoading || lastestOrder.isLoading) return <Loading />;
 
@@ -56,7 +56,7 @@ function Page() {
               }
             />
             {order?.listOrderDetails.map((orderDetails) => (
-              <OrderItem key={orderDetails.id} orderDetail={orderDetails} />
+              <OrderItem key={orderDetails?.id} orderDetail={orderDetails} />
             ))}
             <ListItem>
               <Typography fontWeight={500} ml={"80%"}>

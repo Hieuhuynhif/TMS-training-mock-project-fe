@@ -7,7 +7,11 @@ import Item from "./ItemModel";
 export const revalidate = 60;
 
 async function page() {
-  const res = await fetch(PATH.BASE_URL + PATH.ITEMS);
+  const res = await fetch(PATH.BASE_URL + PATH.ITEMS, {
+    headers: {
+      "TMS-CONNECT-KEY": "tms-connect-key",
+    },
+  });
   const items: Item[] = await res.json();
 
   return (

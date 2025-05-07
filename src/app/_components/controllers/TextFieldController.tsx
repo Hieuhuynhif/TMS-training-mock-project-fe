@@ -1,16 +1,27 @@
 "use client";
 
 import { TextField } from "@mui/material";
-import { Control, Controller, RegisterOptions } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldValues,
+  Path,
+  RegisterOptions,
+} from "react-hook-form";
 
-type Props = {
-  control: Control;
-  name: string;
+type Props<T extends FieldValues> = {
+  control: Control<T>;
+  name: Path<T>;
   label: string;
   validate?: RegisterOptions["validate"];
 };
 
-function TextFieldController({ control, name, label, validate }: Props) {
+function TextFieldController<T extends FieldValues>({
+  control,
+  name,
+  label,
+  validate,
+}: Props<T>) {
   return (
     <Controller
       control={control}
