@@ -11,7 +11,6 @@ export async function GET() {
     if (!session) {
       throw null;
     }
-console.log("first")
     const response = await axiosInstance.get(PATH.ORDERS + "/lastestOrder", {
       headers: {
         Authorization: `Bearer ${session.token}`,

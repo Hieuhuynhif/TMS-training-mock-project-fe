@@ -1,7 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import React from "react";
 import Header from "../_components/common/Header";
-import PrivateRoute from "../_components/common/PrivateRoute";
 import SideBar from "../_components/common/SideBar";
 
 type Props = {
@@ -20,9 +19,7 @@ export default function Layout({ children }: Props) {
           <SideBar />
         </Grid>
         <Grid size={9}>
-          <Container sx={{ p: 4 }}>
-            <PrivateRoute>{children}</PrivateRoute>
-          </Container>
+          <Container sx={{ p: 4 }}>{children}</Container>
         </Grid>
       </Grid>
 

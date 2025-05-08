@@ -14,7 +14,7 @@ function ButtonAccount() {
 
   return (
     <Stack direction={"row"} spacing={3} p={2} alignItems={"center"}>
-      {data?.user && (
+      {data?.user.role == "ROLE_CUSTOMER" && (
         <>
           <IconButton onClick={() => router.push("/orders")}>
             <History />
