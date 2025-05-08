@@ -78,7 +78,7 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
 
-  secret: "secret",
+  secret: "secretKey",
   callbacks: {
     async signIn() {
       return true;
