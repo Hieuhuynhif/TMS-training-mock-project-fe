@@ -29,13 +29,12 @@ declare module "next-auth/jwt" {
 export const authOptions: NextAuthOptions = {
   providers: [
     GithubProvider({
-      clientId: "Ov23liDAoSCCUsbkikJ0",
-      clientSecret: "48cb4d060f92715f3adde5365a1aad619303451d",
+      clientId: process.env.NEXT_GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_GITHUB_CLIENT_SECRET as string,
     }),
     GoogleProvider({
-      clientId:
-        "199033744051-c02pd4mtskirqcgvfogpehdsgmjik2np.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: process.env.NEXT_GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.NEXT_GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialProvider({
       name: "Credentials",
@@ -70,7 +69,7 @@ export const authOptions: NextAuthOptions = {
   ],
 
   pages: {
-    signIn: "/login",
+    signIn: "/login", 
   },
 
   session: {
@@ -78,7 +77,8 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
 
-  secret: "secretKey",
+  secret: process.env.NEXTAUTH_SECRET as string,
+
   callbacks: {
     async signIn() {
       return true;

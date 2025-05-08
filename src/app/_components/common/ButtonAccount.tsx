@@ -12,8 +12,6 @@ function ButtonAccount() {
     if (data?.user.role == "ROLE_ADMIN") router.push("/admin/items");
   });
 
-  console.log(data);
-
   return (
     <Stack direction={"row"} spacing={3} p={2} alignItems={"center"}>
       {data?.user && (
