@@ -1,4 +1,5 @@
 import { Button, Stack } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { axiosClient } from "../../../../config/axios";
 import PATH from "../../_constants/PATH";
@@ -10,10 +11,12 @@ type Props = {
 
 export default function AddItemForm({ onCloseForm }: Props) {
   const { handleSubmit, control } = useForm();
+  const router = useRouter();
 
   const handleOnSubmit = async (values: object) => {
     await axiosClient.post(PATH.ITEMS, values);
     onCloseForm();
+    router.push("/admin/items");
   };
 
   return (

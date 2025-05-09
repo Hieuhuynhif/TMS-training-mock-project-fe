@@ -2,7 +2,6 @@ import PATH from "@/app/_constants/PATH";
 import { AxiosError } from "axios";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 import { axiosInstance } from "../../../../../config/axios";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
@@ -20,7 +19,7 @@ export async function PUT(
       throw null;
     }
 
-    await axiosInstance.put(PATH.ITEMS + "/" + id, body, {
+    const response = await axiosInstance.put(PATH.ITEMS + "/" + id, body, {
       headers: {
         Authorization: `Bearer ${session.token}`,
       },
@@ -29,7 +28,7 @@ export async function PUT(
     revalidatePath("/admin" + PATH.ITEMS);
     revalidatePath(PATH.PRODUCTS);
 
-    redirect("/admin" + PATH.ITEMS);
+    return NextResponse.json(response);
   } catch (e) {
     return NextResponse.json(
       { error: (e as AxiosError).response?.data },
@@ -50,7 +49,7 @@ export async function DELETE(
       throw null;
     }
 
-    await axiosInstance.delete(PATH.ITEMS + "/" + id, {
+    const response = await axiosInstance.delete(PATH.ITEMS + "/" + id, {
       headers: {
         Authorization: `Bearer ${session.token}`,
       },
@@ -59,7 +58,7 @@ export async function DELETE(
     revalidatePath("/admin" + PATH.ITEMS);
     revalidatePath(PATH.PRODUCTS);
 
-    redirect("/admin" + PATH.ITEMS);
+    return NextResponse.json(response);
   } catch (e) {
     return NextResponse.json(
       { error: (e as AxiosError).response?.data },
