@@ -1,6 +1,7 @@
 "use client";
 
 import { TextField } from "@mui/material";
+import { HTMLInputTypeAttribute } from "react";
 import {
   Control,
   Controller,
@@ -14,6 +15,7 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   validate?: RegisterOptions["validate"];
+  type?: HTMLInputTypeAttribute;
 };
 
 function TextFieldController<T extends FieldValues>({
@@ -21,6 +23,7 @@ function TextFieldController<T extends FieldValues>({
   name,
   label,
   validate,
+  type,
 }: Props<T>) {
   return (
     <Controller
@@ -34,6 +37,7 @@ function TextFieldController<T extends FieldValues>({
             onChange={(e) => onChange(e.target.value)}
             error={!!error}
             helperText={error?.message ?? " "}
+            type={type}
           />
         );
       }}

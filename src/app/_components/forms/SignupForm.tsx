@@ -1,10 +1,13 @@
 "use client";
 
 import PATH from "@/app/_constants/PATH";
+import { Error } from "@/app/_types/Error";
 import { Button, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { axiosInstance } from "../../../../config/axios";
+import CustomNotification from "../common/CustomNotification";
 import TextFieldController from "../controllers/TextFieldController";
 
 function SignupForm() {
@@ -13,13 +16,14 @@ function SignupForm() {
   const password = watch("password");
 
   const router = useRouter();
+  const [notification, setNotification] = useState<string>("");
 
   const handleSignupClick = async (values: object) => {
     try {
       await axiosInstance.post(PATH.BASE_URL + PATH.SIGNUP, values);
-      router.push(PATH.LOGIN);
+      router.push("/login");
     } catch (e) {
-      console.log(e);
+      setNotification((e as Error)?.response?.data?.message ?? "");
     }
   };
 
@@ -35,11 +39,13 @@ function SignupForm() {
           control={control}
           name="password"
           label="Password"
+          type="password"
         />
         <TextFieldController
           control={control}
           name="confirmPassword"
           label="Confirm Password"
+          type="password"
           validate={(value) => {
             if (value != password) return "Password is not match";
           }}
@@ -52,6 +58,12 @@ function SignupForm() {
           <Button onClick={() => router.push("/")}>Back to Home</Button>
         </Stack>
       </Stack>
+      <CustomNotification
+        open={!!notification}
+        onClose={() => setNotification("")}
+        message={notification}
+        type="error"
+      />
     </form>
   );
 }

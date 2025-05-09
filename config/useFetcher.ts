@@ -17,6 +17,7 @@ const useFetcher = <T>({ callback }: Props<T>) => {
     } catch (error) {
       if ((error as AxiosError)?.status == 401) {
         router.push("/login");
+        localStorage.setItem("isUserExpired", "1");
       }
       return Promise.reject(error);
     }
