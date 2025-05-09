@@ -26,6 +26,7 @@ export async function PUT(
     });
 
     revalidatePath("/admin" + PATH.ITEMS);
+    revalidatePath("/admin" + PATH.ITEMS + "/" + id);
     revalidatePath(PATH.PRODUCTS);
 
     return NextResponse.json(response);
@@ -56,6 +57,7 @@ export async function DELETE(
     });
 
     revalidatePath("/admin" + PATH.ITEMS);
+    revalidatePath("/admin" + PATH.ITEMS + "/" + id);
     revalidatePath(PATH.PRODUCTS);
 
     return NextResponse.json(response);
