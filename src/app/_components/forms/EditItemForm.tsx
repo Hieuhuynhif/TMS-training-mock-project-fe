@@ -1,4 +1,5 @@
 import { Error } from "@/app/_types/Error";
+import Item from "@/app/admin/items/ItemModel";
 import { Button, Stack } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,16 +11,17 @@ import TextFieldController from "../controllers/TextFieldController";
 
 type Props = {
   onCloseForm: () => void;
+  item: Item;
 };
 
-export default function AddItemForm({ onCloseForm }: Props) {
-  const { handleSubmit, control } = useForm();
+export default function EditItemForm({ onCloseForm, item }: Props) {
+  const { handleSubmit, control } = useForm<Item>({ defaultValues: item });
   const [notification, setNotification] = useState<string>("");
   const router = useRouter();
 
   const handleOnSubmit = async (values: object) => {
     try {
-      await axiosClient.post(PATH.ITEMS, values);
+      await axiosClient.put(PATH.ITEMS + "/" + `${item.id}`, values);
       onCloseForm();
       router.push("/admin/items");
     } catch (error) {
@@ -37,7 +39,7 @@ export default function AddItemForm({ onCloseForm }: Props) {
       <Stack spacing={2}>
         <TextFieldController control={control} label="Name" name="name" />
         <TextFieldController control={control} label="Price" name="price" />
-        <Button type="submit">Add</Button>
+        <Button type="submit">Save</Button>
       </Stack>
       <CustomNotification
         open={!!notification}

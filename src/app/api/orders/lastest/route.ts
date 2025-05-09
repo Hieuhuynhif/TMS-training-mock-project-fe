@@ -18,9 +18,8 @@ export async function GET() {
     });
     return NextResponse.json(response);
   } catch (e) {
-    return NextResponse.json(
-      { error: (e as AxiosError).response?.data },
-      { status: (e as AxiosError).response?.status }
-    );
+    return NextResponse.json((e as AxiosError).response?.data, {
+      status: (e as AxiosError).response?.status,
+    });
   }
 }

@@ -1,6 +1,7 @@
 import DeleteButton from "@/app/_components/common/DeleteButton";
+import EditItem from "@/app/_components/common/EditItem";
 import PATH from "@/app/_constants/PATH";
-import { Button, Container, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Item from "../ItemModel";
 
@@ -37,7 +38,9 @@ async function page({ params }: Props) {
         <Typography>ID: {item.id}</Typography>
         <Typography>Name: {item.name}</Typography>
         <Typography>${item.price}</Typography>
-        <Button color="primary">Edit</Button>
+
+        <EditItem item={item} />
+
         <DeleteButton
           url={PATH.ITEMS + "/" + id}
           backUrl={"/admin" + PATH.ITEMS}

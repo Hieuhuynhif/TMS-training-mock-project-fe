@@ -19,11 +19,9 @@ export async function GET() {
     });
     return NextResponse.json(response);
   } catch (e) {
-    console.log(JSON.stringify(e));
-    return NextResponse.json(
-      { error: (e as AxiosError).response?.data },
-      { status: (e as AxiosError).response?.status }
-    );
+    return NextResponse.json((e as AxiosError).response?.data, {
+      status: (e as AxiosError).response?.status,
+    });
   }
 }
 
@@ -45,10 +43,9 @@ export async function POST(request: NextRequest) {
     );
     return NextResponse.json(response);
   } catch (e) {
-    return NextResponse.json(
-      { error: (e as AxiosError).response?.data },
-      { status: (e as AxiosError).response?.status }
-    );
+    return NextResponse.json((e as AxiosError).response?.data, {
+      status: (e as AxiosError).response?.status,
+    });
   }
 }
 
@@ -66,9 +63,8 @@ export async function PUT(request: NextRequest) {
     });
     return NextResponse.json(response);
   } catch (e) {
-    return NextResponse.json(
-      { error: (e as AxiosError).response?.data },
-      { status: (e as AxiosError).response?.status }
-    );
+    return NextResponse.json((e as AxiosError).response?.data, {
+      status: (e as AxiosError).response?.status,
+    });
   }
 }
